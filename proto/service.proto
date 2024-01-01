@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package app_service;
+
+option go_package = "proto/";
+
+service AppService {
+    rpc PairwiseAnalysis(PairwiseAnalysisRequest) returns (PairwiseAnalysisResponse) {}
+    rpc Backtest(BacktestRequest) returns (BacktestResponse) {}
+}
+
+message PairwiseAnalysisRequest {
+    string configFile = 1;
+}
+
+message PairwiseAnalysisResponse {}
+
+message BacktestRequest {
+    string configFile = 1;
+}
+
+message BacktestResponse {}
