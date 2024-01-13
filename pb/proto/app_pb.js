@@ -1,4 +1,4 @@
-// source: proto/service.proto
+// source: proto/app.proto
 /**
  * @fileoverview
  * @enhanceable

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package quant_service;
+
+option go_package = "proto/";
+
+service QuantService {
+    rpc RollingOrdinaryLeastSquares(stream RollingOrdinaryLeastSquaresDatapoint) returns (RollingOrdinaryLeastSquaresResult) {}
+}
+
+message RollingOrdinaryLeastSquaresDatapoint {
+    int64 id = 1;
+}
+
+message RollingOrdinaryLeastSquaresResult {
+    int64 id = 1;
+}
