@@ -19,12 +19,23 @@ class QuantServiceStub(object):
                 request_serializer=quant__pb2.RollingOrdinaryLeastSquaresDatapoint.SerializeToString,
                 response_deserializer=quant__pb2.RollingOrdinaryLeastSquaresResult.FromString,
                 )
+        self.Unary = channel.unary_unary(
+                '/quant_service.QuantService/Unary',
+                request_serializer=quant__pb2.RequestTest.SerializeToString,
+                response_deserializer=quant__pb2.ResponseTest.FromString,
+                )
 
 
 class QuantServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def RollingOrdinaryLeastSquares(self, request_iterator, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Unary(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -37,6 +48,11 @@ def add_QuantServiceServicer_to_server(servicer, server):
                     servicer.RollingOrdinaryLeastSquares,
                     request_deserializer=quant__pb2.RollingOrdinaryLeastSquaresDatapoint.FromString,
                     response_serializer=quant__pb2.RollingOrdinaryLeastSquaresResult.SerializeToString,
+            ),
+            'Unary': grpc.unary_unary_rpc_method_handler(
+                    servicer.Unary,
+                    request_deserializer=quant__pb2.RequestTest.FromString,
+                    response_serializer=quant__pb2.ResponseTest.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -62,5 +78,22 @@ class QuantService(object):
         return grpc.experimental.stream_unary(request_iterator, target, '/quant_service.QuantService/RollingOrdinaryLeastSquares',
             quant__pb2.RollingOrdinaryLeastSquaresDatapoint.SerializeToString,
             quant__pb2.RollingOrdinaryLeastSquaresResult.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Unary(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/quant_service.QuantService/Unary',
+            quant__pb2.RequestTest.SerializeToString,
+            quant__pb2.ResponseTest.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

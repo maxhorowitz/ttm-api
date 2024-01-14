@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 
 const (
 	QuantService_RollingOrdinaryLeastSquares_FullMethodName = "/quant_service.QuantService/RollingOrdinaryLeastSquares"
+	QuantService_Unary_FullMethodName                       = "/quant_service.QuantService/Unary"
 )
 
 // QuantServiceClient is the client API for QuantService service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type QuantServiceClient interface {
 	RollingOrdinaryLeastSquares(ctx context.Context, opts ...grpc.CallOption) (QuantService_RollingOrdinaryLeastSquaresClient, error)
+	Unary(ctx context.Context, in *RequestTest, opts ...grpc.CallOption) (*ResponseTest, error)
 }
 
 type quantServiceClient struct {
@@ -71,11 +73,21 @@ func (x *quantServiceRollingOrdinaryLeastSquaresClient) CloseAndRecv() (*Rolling
 	return m, nil
 }
 
+func (c *quantServiceClient) Unary(ctx context.Context, in *RequestTest, opts ...grpc.CallOption) (*ResponseTest, error) {
+	out := new(ResponseTest)
+	err := c.cc.Invoke(ctx, QuantService_Unary_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QuantServiceServer is the server API for QuantService service.
 // All implementations must embed UnimplementedQuantServiceServer
 // for forward compatibility
 type QuantServiceServer interface {
 	RollingOrdinaryLeastSquares(QuantService_RollingOrdinaryLeastSquaresServer) error
+	Unary(context.Context, *RequestTest) (*ResponseTest, error)
 	mustEmbedUnimplementedQuantServiceServer()
 }
 
@@ -85,6 +97,9 @@ type UnimplementedQuantServiceServer struct {
 
 func (UnimplementedQuantServiceServer) RollingOrdinaryLeastSquares(QuantService_RollingOrdinaryLeastSquaresServer) error {
 	return status.Errorf(codes.Unimplemented, "method RollingOrdinaryLeastSquares not implemented")
+}
+func (UnimplementedQuantServiceServer) Unary(context.Context, *RequestTest) (*ResponseTest, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Unary not implemented")
 }
 func (UnimplementedQuantServiceServer) mustEmbedUnimplementedQuantServiceServer() {}
 
@@ -125,13 +140,36 @@ func (x *quantServiceRollingOrdinaryLeastSquaresServer) Recv() (*RollingOrdinary
 	return m, nil
 }
 
+func _QuantService_Unary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestTest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QuantServiceServer).Unary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: QuantService_Unary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QuantServiceServer).Unary(ctx, req.(*RequestTest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // QuantService_ServiceDesc is the grpc.ServiceDesc for QuantService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var QuantService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "quant_service.QuantService",
 	HandlerType: (*QuantServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Unary",
+			Handler:    _QuantService_Unary_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "RollingOrdinaryLeastSquares",

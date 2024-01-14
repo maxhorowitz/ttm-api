@@ -6,6 +6,16 @@ option go_package = "proto/";
 
 service QuantService {
     rpc RollingOrdinaryLeastSquares(stream RollingOrdinaryLeastSquaresDatapoint) returns (RollingOrdinaryLeastSquaresResult) {}
+    rpc Unary(RequestTest) returns (ResponseTest) {}
+}
+
+message RequestTest {
+    string name = 1;
+}
+
+message ResponseTest {
+    string name = 1;
+    bool received = 2;
 }
 
 message RollingOrdinaryLeastSquaresDatapoint {

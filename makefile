@@ -1,8 +1,6 @@
 PB_DIR := pb
 PROTO_DIR := proto
-
-clean:
-	rm -rf ${PB_DIR} && mkdir ${PB_DIR}
+PYTHON_DIR := .
 
 app:
 	grpc_tools_node_protoc \
@@ -25,8 +23,8 @@ quant:
 		${PROTO_DIR}/quant.proto
 	python3 -m grpc_tools.protoc \
 		--proto_path=${PROTO_DIR} \
-		--python_out=${PB_DIR}/${PROTO_DIR} \
-		--grpc_python_out=${PB_DIR}/${PROTO_DIR} \
+		--python_out=${PYTHON_DIR} \
+		--grpc_python_out=${PYTHON_DIR} \
 		${PROTO_DIR}/quant.proto
 
-gen: clean app quant
+gen: app quant
