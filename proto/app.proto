@@ -9,14 +9,17 @@ service AppService {
     rpc Backtest(BacktestRequest) returns (BacktestResponse) {}
 }
 
-message PairwiseAnalysisRequest {
-    string configFile = 1;
-}
+message PairwiseAnalysisRequest {}
 
 message PairwiseAnalysisResponse {}
 
 message BacktestRequest {
-    string configFile = 1;
+    string tickerA = 1;
+    string tickerB = 2;
+    int32 daysRange = 3;
+    int32 daysOffset = 4;
 }
 
-message BacktestResponse {}
+message BacktestResponse {
+    bool submitted = 1;
+}

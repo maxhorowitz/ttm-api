@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v4.25.1
-// source: proto/quant.proto
+// source: quant.proto
 
 package proto
 
@@ -177,5 +177,5 @@ var QuantService_ServiceDesc = grpc.ServiceDesc{
 			ClientStreams: true,
 		},
 	},
-	Metadata: "proto/quant.proto",
+	Metadata: "quant.proto",
 }
