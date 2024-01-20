@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bquant.proto\x12\rquant_service\"\x1b\n\x0bRequestTest\x12\x0c\n\x04name\x18\x01 \x01(\t\".\n\x0cResponseTest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08received\x18\x02 \x01(\x08\"2\n$RollingOrdinaryLeastSquaresDatapoint\x12\n\n\x02id\x18\x01 \x01(\x03\"/\n!RollingOrdinaryLeastSquaresResult\x12\n\n\x02id\x18\x01 \x01(\x03\x32\xdd\x01\n\x0cQuantService\x12\x88\x01\n\x1bRollingOrdinaryLeastSquares\x12\x33.quant_service.RollingOrdinaryLeastSquaresDatapoint\x1a\x30.quant_service.RollingOrdinaryLeastSquaresResult\"\x00(\x01\x12\x42\n\x05Unary\x12\x1a.quant_service.RequestTest\x1a\x1b.quant_service.ResponseTest\"\x00\x42\x08Z\x06proto/b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bquant.proto\x12\rquant_service\"\x1f\n\x11RegressionRequest\x12\n\n\x02id\x18\x01 \x01(\t\"1\n\x10RegressionResult\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\tsubmitted\x18\x02 \x01(\x08\x32\x61\n\x0cQuantService\x12Q\n\nRegression\x12 .quant_service.RegressionRequest\x1a\x1f.quant_service.RegressionResult\"\x00\x42\x08Z\x06proto/b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,14 +22,10 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'quant_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['DESCRIPTOR']._options = None
   _globals['DESCRIPTOR']._serialized_options = b'Z\006proto/'
-  _globals['_REQUESTTEST']._serialized_start=30
-  _globals['_REQUESTTEST']._serialized_end=57
-  _globals['_RESPONSETEST']._serialized_start=59
-  _globals['_RESPONSETEST']._serialized_end=105
-  _globals['_ROLLINGORDINARYLEASTSQUARESDATAPOINT']._serialized_start=107
-  _globals['_ROLLINGORDINARYLEASTSQUARESDATAPOINT']._serialized_end=157
-  _globals['_ROLLINGORDINARYLEASTSQUARESRESULT']._serialized_start=159
-  _globals['_ROLLINGORDINARYLEASTSQUARESRESULT']._serialized_end=206
-  _globals['_QUANTSERVICE']._serialized_start=209
-  _globals['_QUANTSERVICE']._serialized_end=430
+  _globals['_REGRESSIONREQUEST']._serialized_start=30
+  _globals['_REGRESSIONREQUEST']._serialized_end=61
+  _globals['_REGRESSIONRESULT']._serialized_start=63
+  _globals['_REGRESSIONRESULT']._serialized_end=112
+  _globals['_QUANTSERVICE']._serialized_start=114
+  _globals['_QUANTSERVICE']._serialized_end=211
 # @@protoc_insertion_point(module_scope)

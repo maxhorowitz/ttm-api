@@ -5,23 +5,15 @@ package quant_service;
 option go_package = "proto/";
 
 service QuantService {
-    rpc RollingOrdinaryLeastSquares(stream RollingOrdinaryLeastSquaresDatapoint) returns (RollingOrdinaryLeastSquaresResult) {}
-    rpc Unary(RequestTest) returns (ResponseTest) {}
+    rpc Regression(RegressionRequest) returns (RegressionResult) {}
 }
 
-message RequestTest {
-    string name = 1;
+message RegressionRequest {
+    string id = 1;
+
 }
 
-message ResponseTest {
-    string name = 1;
-    bool received = 2;
-}
-
-message RollingOrdinaryLeastSquaresDatapoint {
-    int64 id = 1;
-}
-
-message RollingOrdinaryLeastSquaresResult {
-    int64 id = 1;
+message RegressionResult {
+    string id = 1;
+    bool submitted = 2;
 }

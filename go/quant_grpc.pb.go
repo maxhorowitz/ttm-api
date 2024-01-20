@@ -19,16 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	QuantService_RollingOrdinaryLeastSquares_FullMethodName = "/quant_service.QuantService/RollingOrdinaryLeastSquares"
-	QuantService_Unary_FullMethodName                       = "/quant_service.QuantService/Unary"
+	QuantService_Regression_FullMethodName = "/quant_service.QuantService/Regression"
 )
 
 // QuantServiceClient is the client API for QuantService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type QuantServiceClient interface {
-	RollingOrdinaryLeastSquares(ctx context.Context, opts ...grpc.CallOption) (QuantService_RollingOrdinaryLeastSquaresClient, error)
-	Unary(ctx context.Context, in *RequestTest, opts ...grpc.CallOption) (*ResponseTest, error)
+	Regression(ctx context.Context, in *RegressionRequest, opts ...grpc.CallOption) (*RegressionResult, error)
 }
 
 type quantServiceClient struct {
@@ -39,43 +37,9 @@ func NewQuantServiceClient(cc grpc.ClientConnInterface) QuantServiceClient {
 	return &quantServiceClient{cc}
 }
 
-func (c *quantServiceClient) RollingOrdinaryLeastSquares(ctx context.Context, opts ...grpc.CallOption) (QuantService_RollingOrdinaryLeastSquaresClient, error) {
-	stream, err := c.cc.NewStream(ctx, &QuantService_ServiceDesc.Streams[0], QuantService_RollingOrdinaryLeastSquares_FullMethodName, opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &quantServiceRollingOrdinaryLeastSquaresClient{stream}
-	return x, nil
-}
-
-type QuantService_RollingOrdinaryLeastSquaresClient interface {
-	Send(*RollingOrdinaryLeastSquaresDatapoint) error
-	CloseAndRecv() (*RollingOrdinaryLeastSquaresResult, error)
-	grpc.ClientStream
-}
-
-type quantServiceRollingOrdinaryLeastSquaresClient struct {
-	grpc.ClientStream
-}
-
-func (x *quantServiceRollingOrdinaryLeastSquaresClient) Send(m *RollingOrdinaryLeastSquaresDatapoint) error {
-	return x.ClientStream.SendMsg(m)
-}
-
-func (x *quantServiceRollingOrdinaryLeastSquaresClient) CloseAndRecv() (*RollingOrdinaryLeastSquaresResult, error) {
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	m := new(RollingOrdinaryLeastSquaresResult)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *quantServiceClient) Unary(ctx context.Context, in *RequestTest, opts ...grpc.CallOption) (*ResponseTest, error) {
-	out := new(ResponseTest)
-	err := c.cc.Invoke(ctx, QuantService_Unary_FullMethodName, in, out, opts...)
+func (c *quantServiceClient) Regression(ctx context.Context, in *RegressionRequest, opts ...grpc.CallOption) (*RegressionResult, error) {
+	out := new(RegressionResult)
+	err := c.cc.Invoke(ctx, QuantService_Regression_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -86,8 +50,7 @@ func (c *quantServiceClient) Unary(ctx context.Context, in *RequestTest, opts ..
 // All implementations must embed UnimplementedQuantServiceServer
 // for forward compatibility
 type QuantServiceServer interface {
-	RollingOrdinaryLeastSquares(QuantService_RollingOrdinaryLeastSquaresServer) error
-	Unary(context.Context, *RequestTest) (*ResponseTest, error)
+	Regression(context.Context, *RegressionRequest) (*RegressionResult, error)
 	mustEmbedUnimplementedQuantServiceServer()
 }
 
@@ -95,11 +58,8 @@ type QuantServiceServer interface {
 type UnimplementedQuantServiceServer struct {
 }
 
-func (UnimplementedQuantServiceServer) RollingOrdinaryLeastSquares(QuantService_RollingOrdinaryLeastSquaresServer) error {
-	return status.Errorf(codes.Unimplemented, "method RollingOrdinaryLeastSquares not implemented")
-}
-func (UnimplementedQuantServiceServer) Unary(context.Context, *RequestTest) (*ResponseTest, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Unary not implemented")
+func (UnimplementedQuantServiceServer) Regression(context.Context, *RegressionRequest) (*RegressionResult, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Regression not implemented")
 }
 func (UnimplementedQuantServiceServer) mustEmbedUnimplementedQuantServiceServer() {}
 
@@ -114,46 +74,20 @@ func RegisterQuantServiceServer(s grpc.ServiceRegistrar, srv QuantServiceServer)
 	s.RegisterService(&QuantService_ServiceDesc, srv)
 }
 
-func _QuantService_RollingOrdinaryLeastSquares_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(QuantServiceServer).RollingOrdinaryLeastSquares(&quantServiceRollingOrdinaryLeastSquaresServer{stream})
-}
-
-type QuantService_RollingOrdinaryLeastSquaresServer interface {
-	SendAndClose(*RollingOrdinaryLeastSquaresResult) error
-	Recv() (*RollingOrdinaryLeastSquaresDatapoint, error)
-	grpc.ServerStream
-}
-
-type quantServiceRollingOrdinaryLeastSquaresServer struct {
-	grpc.ServerStream
-}
-
-func (x *quantServiceRollingOrdinaryLeastSquaresServer) SendAndClose(m *RollingOrdinaryLeastSquaresResult) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func (x *quantServiceRollingOrdinaryLeastSquaresServer) Recv() (*RollingOrdinaryLeastSquaresDatapoint, error) {
-	m := new(RollingOrdinaryLeastSquaresDatapoint)
-	if err := x.ServerStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func _QuantService_Unary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RequestTest)
+func _QuantService_Regression_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegressionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QuantServiceServer).Unary(ctx, in)
+		return srv.(QuantServiceServer).Regression(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: QuantService_Unary_FullMethodName,
+		FullMethod: QuantService_Regression_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QuantServiceServer).Unary(ctx, req.(*RequestTest))
+		return srv.(QuantServiceServer).Regression(ctx, req.(*RegressionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -166,16 +100,10 @@ var QuantService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*QuantServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Unary",
-			Handler:    _QuantService_Unary_Handler,
+			MethodName: "Regression",
+			Handler:    _QuantService_Regression_Handler,
 		},
 	},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "RollingOrdinaryLeastSquares",
-			Handler:       _QuantService_RollingOrdinaryLeastSquares_Handler,
-			ClientStreams: true,
-		},
-	},
+	Streams:  []grpc.StreamDesc{},
 	Metadata: "quant.proto",
 }

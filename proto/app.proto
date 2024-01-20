@@ -20,6 +20,4 @@ message BacktestRequest {
     int32 daysOffset = 4;
 }
 
-message BacktestResponse {
-    bool submitted = 1;
-}
+message BacktestResponse {}

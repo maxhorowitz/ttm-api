@@ -70,7 +70,7 @@ proto.app_service.BacktestResponse.prototype.toObject = function(opt_includeInst
  */
 proto.app_service.BacktestResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    submitted: jspb.Message.getBooleanFieldWithDefault(msg, 1, false)
+
   };
 
   if (includeInstance) {
@@ -107,10 +107,6 @@ proto.app_service.BacktestResponse.deserializeBinaryFromReader = function(msg, r
     }
     var field = reader.getFieldNumber();
     switch (field) {
-    case 1:
-      var value = /** @type {boolean} */ (reader.readBool());
-      msg.setSubmitted(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -140,31 +136,6 @@ proto.app_service.BacktestResponse.prototype.serializeBinary = function() {
  */
 proto.app_service.BacktestResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getSubmitted();
-  if (f) {
-    writer.writeBool(
-      1,
-      f
-    );
-  }
-};
-
-
-/**
- * optional bool submitted = 1;
- * @return {boolean}
- */
-proto.app_service.BacktestResponse.prototype.getSubmitted = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 1, false));
-};
-
-
-/**
- * @param {boolean} value
- * @return {!proto.app_service.BacktestResponse} returns this
- */
-proto.app_service.BacktestResponse.prototype.setSubmitted = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 1, value);
 };
 
 

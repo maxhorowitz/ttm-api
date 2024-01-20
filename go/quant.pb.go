@@ -20,16 +20,16 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type RequestTest struct {
+type RegressionRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 }
 
-func (x *RequestTest) Reset() {
-	*x = RequestTest{}
+func (x *RegressionRequest) Reset() {
+	*x = RegressionRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_quant_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -37,13 +37,13 @@ func (x *RequestTest) Reset() {
 	}
 }
 
-func (x *RequestTest) String() string {
+func (x *RegressionRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RequestTest) ProtoMessage() {}
+func (*RegressionRequest) ProtoMessage() {}
 
-func (x *RequestTest) ProtoReflect() protoreflect.Message {
+func (x *RegressionRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_quant_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -55,29 +55,29 @@ func (x *RequestTest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RequestTest.ProtoReflect.Descriptor instead.
-func (*RequestTest) Descriptor() ([]byte, []int) {
+// Deprecated: Use RegressionRequest.ProtoReflect.Descriptor instead.
+func (*RegressionRequest) Descriptor() ([]byte, []int) {
 	return file_quant_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *RequestTest) GetName() string {
+func (x *RegressionRequest) GetId() string {
 	if x != nil {
-		return x.Name
+		return x.Id
 	}
 	return ""
 }
 
-type ResponseTest struct {
+type RegressionResult struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name     string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Received bool   `protobuf:"varint,2,opt,name=received,proto3" json:"received,omitempty"`
+	Id        string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Submitted bool   `protobuf:"varint,2,opt,name=submitted,proto3" json:"submitted,omitempty"`
 }
 
-func (x *ResponseTest) Reset() {
-	*x = ResponseTest{}
+func (x *RegressionResult) Reset() {
+	*x = RegressionResult{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_quant_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -85,13 +85,13 @@ func (x *ResponseTest) Reset() {
 	}
 }
 
-func (x *ResponseTest) String() string {
+func (x *RegressionResult) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ResponseTest) ProtoMessage() {}
+func (*RegressionResult) ProtoMessage() {}
 
-func (x *ResponseTest) ProtoReflect() protoreflect.Message {
+func (x *RegressionResult) ProtoReflect() protoreflect.Message {
 	mi := &file_quant_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -103,152 +103,44 @@ func (x *ResponseTest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResponseTest.ProtoReflect.Descriptor instead.
-func (*ResponseTest) Descriptor() ([]byte, []int) {
+// Deprecated: Use RegressionResult.ProtoReflect.Descriptor instead.
+func (*RegressionResult) Descriptor() ([]byte, []int) {
 	return file_quant_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ResponseTest) GetName() string {
+func (x *RegressionResult) GetId() string {
 	if x != nil {
-		return x.Name
+		return x.Id
 	}
 	return ""
 }
 
-func (x *ResponseTest) GetReceived() bool {
+func (x *RegressionResult) GetSubmitted() bool {
 	if x != nil {
-		return x.Received
+		return x.Submitted
 	}
 	return false
-}
-
-type RollingOrdinaryLeastSquaresDatapoint struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-}
-
-func (x *RollingOrdinaryLeastSquaresDatapoint) Reset() {
-	*x = RollingOrdinaryLeastSquaresDatapoint{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_quant_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *RollingOrdinaryLeastSquaresDatapoint) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RollingOrdinaryLeastSquaresDatapoint) ProtoMessage() {}
-
-func (x *RollingOrdinaryLeastSquaresDatapoint) ProtoReflect() protoreflect.Message {
-	mi := &file_quant_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RollingOrdinaryLeastSquaresDatapoint.ProtoReflect.Descriptor instead.
-func (*RollingOrdinaryLeastSquaresDatapoint) Descriptor() ([]byte, []int) {
-	return file_quant_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *RollingOrdinaryLeastSquaresDatapoint) GetId() int64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-type RollingOrdinaryLeastSquaresResult struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-}
-
-func (x *RollingOrdinaryLeastSquaresResult) Reset() {
-	*x = RollingOrdinaryLeastSquaresResult{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_quant_proto_msgTypes[3]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *RollingOrdinaryLeastSquaresResult) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RollingOrdinaryLeastSquaresResult) ProtoMessage() {}
-
-func (x *RollingOrdinaryLeastSquaresResult) ProtoReflect() protoreflect.Message {
-	mi := &file_quant_proto_msgTypes[3]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RollingOrdinaryLeastSquaresResult.ProtoReflect.Descriptor instead.
-func (*RollingOrdinaryLeastSquaresResult) Descriptor() ([]byte, []int) {
-	return file_quant_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *RollingOrdinaryLeastSquaresResult) GetId() int64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
 }
 
 var File_quant_proto protoreflect.FileDescriptor
 
 var file_quant_proto_rawDesc = []byte{
 	0x0a, 0x0b, 0x71, 0x75, 0x61, 0x6e, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0d, 0x71,
-	0x75, 0x61, 0x6e, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x22, 0x21, 0x0a, 0x0b,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x54, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e,
-	0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22,
-	0x3e, 0x0a, 0x0c, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x54, 0x65, 0x73, 0x74, 0x12,
-	0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e,
-	0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x72, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x64, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x72, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x64, 0x22,
-	0x36, 0x0a, 0x24, 0x52, 0x6f, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x4f, 0x72, 0x64, 0x69, 0x6e, 0x61,
-	0x72, 0x79, 0x4c, 0x65, 0x61, 0x73, 0x74, 0x53, 0x71, 0x75, 0x61, 0x72, 0x65, 0x73, 0x44, 0x61,
-	0x74, 0x61, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x22, 0x33, 0x0a, 0x21, 0x52, 0x6f, 0x6c, 0x6c, 0x69,
-	0x6e, 0x67, 0x4f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x72, 0x79, 0x4c, 0x65, 0x61, 0x73, 0x74, 0x53,
-	0x71, 0x75, 0x61, 0x72, 0x65, 0x73, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x0e, 0x0a, 0x02,
-	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x32, 0xdd, 0x01, 0x0a,
-	0x0c, 0x51, 0x75, 0x61, 0x6e, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x88, 0x01,
-	0x0a, 0x1b, 0x52, 0x6f, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x4f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x72,
-	0x79, 0x4c, 0x65, 0x61, 0x73, 0x74, 0x53, 0x71, 0x75, 0x61, 0x72, 0x65, 0x73, 0x12, 0x33, 0x2e,
-	0x71, 0x75, 0x61, 0x6e, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x52, 0x6f,
-	0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x4f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x72, 0x79, 0x4c, 0x65, 0x61,
-	0x73, 0x74, 0x53, 0x71, 0x75, 0x61, 0x72, 0x65, 0x73, 0x44, 0x61, 0x74, 0x61, 0x70, 0x6f, 0x69,
-	0x6e, 0x74, 0x1a, 0x30, 0x2e, 0x71, 0x75, 0x61, 0x6e, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69,
-	0x63, 0x65, 0x2e, 0x52, 0x6f, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x4f, 0x72, 0x64, 0x69, 0x6e, 0x61,
-	0x72, 0x79, 0x4c, 0x65, 0x61, 0x73, 0x74, 0x53, 0x71, 0x75, 0x61, 0x72, 0x65, 0x73, 0x52, 0x65,
-	0x73, 0x75, 0x6c, 0x74, 0x22, 0x00, 0x28, 0x01, 0x12, 0x42, 0x0a, 0x05, 0x55, 0x6e, 0x61, 0x72,
-	0x79, 0x12, 0x1a, 0x2e, 0x71, 0x75, 0x61, 0x6e, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
-	0x65, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x54, 0x65, 0x73, 0x74, 0x1a, 0x1b, 0x2e,
-	0x71, 0x75, 0x61, 0x6e, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x54, 0x65, 0x73, 0x74, 0x22, 0x00, 0x42, 0x08, 0x5a, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x75, 0x61, 0x6e, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x22, 0x23, 0x0a, 0x11,
+	0x52, 0x65, 0x67, 0x72, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69,
+	0x64, 0x22, 0x40, 0x0a, 0x10, 0x52, 0x65, 0x67, 0x72, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52,
+	0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x73, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x74,
+	0x65, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09, 0x73, 0x75, 0x62, 0x6d, 0x69, 0x74,
+	0x74, 0x65, 0x64, 0x32, 0x61, 0x0a, 0x0c, 0x51, 0x75, 0x61, 0x6e, 0x74, 0x53, 0x65, 0x72, 0x76,
+	0x69, 0x63, 0x65, 0x12, 0x51, 0x0a, 0x0a, 0x52, 0x65, 0x67, 0x72, 0x65, 0x73, 0x73, 0x69, 0x6f,
+	0x6e, 0x12, 0x20, 0x2e, 0x71, 0x75, 0x61, 0x6e, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x2e, 0x52, 0x65, 0x67, 0x72, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e, 0x71, 0x75, 0x61, 0x6e, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76,
+	0x69, 0x63, 0x65, 0x2e, 0x52, 0x65, 0x67, 0x72, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65,
+	0x73, 0x75, 0x6c, 0x74, 0x22, 0x00, 0x42, 0x08, 0x5a, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -263,20 +155,16 @@ func file_quant_proto_rawDescGZIP() []byte {
 	return file_quant_proto_rawDescData
 }
 
-var file_quant_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_quant_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_quant_proto_goTypes = []interface{}{
-	(*RequestTest)(nil),                          // 0: quant_service.RequestTest
-	(*ResponseTest)(nil),                         // 1: quant_service.ResponseTest
-	(*RollingOrdinaryLeastSquaresDatapoint)(nil), // 2: quant_service.RollingOrdinaryLeastSquaresDatapoint
-	(*RollingOrdinaryLeastSquaresResult)(nil),    // 3: quant_service.RollingOrdinaryLeastSquaresResult
+	(*RegressionRequest)(nil), // 0: quant_service.RegressionRequest
+	(*RegressionResult)(nil),  // 1: quant_service.RegressionResult
 }
 var file_quant_proto_depIdxs = []int32{
-	2, // 0: quant_service.QuantService.RollingOrdinaryLeastSquares:input_type -> quant_service.RollingOrdinaryLeastSquaresDatapoint
-	0, // 1: quant_service.QuantService.Unary:input_type -> quant_service.RequestTest
-	3, // 2: quant_service.QuantService.RollingOrdinaryLeastSquares:output_type -> quant_service.RollingOrdinaryLeastSquaresResult
-	1, // 3: quant_service.QuantService.Unary:output_type -> quant_service.ResponseTest
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	0, // 0: quant_service.QuantService.Regression:input_type -> quant_service.RegressionRequest
+	1, // 1: quant_service.QuantService.Regression:output_type -> quant_service.RegressionResult
+	1, // [1:2] is the sub-list for method output_type
+	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -289,7 +177,7 @@ func file_quant_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_quant_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RequestTest); i {
+			switch v := v.(*RegressionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -301,31 +189,7 @@ func file_quant_proto_init() {
 			}
 		}
 		file_quant_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ResponseTest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_quant_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RollingOrdinaryLeastSquaresDatapoint); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_quant_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RollingOrdinaryLeastSquaresResult); i {
+			switch v := v.(*RegressionResult); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -343,7 +207,7 @@ func file_quant_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_quant_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
