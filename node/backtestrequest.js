@@ -28,7 +28,7 @@ goog.require('jspb.Message');
  * @constructor
  */
 proto.app_service.BacktestRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.app_service.BacktestRequest.repeatedFields_, null);
 };
 goog.inherits(proto.app_service.BacktestRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -38,6 +38,13 @@ if (goog.DEBUG && !COMPILED) {
    */
   proto.app_service.BacktestRequest.displayName = 'proto.app_service.BacktestRequest';
 }
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.app_service.BacktestRequest.repeatedFields_ = [1];
 
 
 
@@ -70,10 +77,9 @@ proto.app_service.BacktestRequest.prototype.toObject = function(opt_includeInsta
  */
 proto.app_service.BacktestRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    tickera: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    tickerb: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    daysrange: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    daysoffset: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    tickerList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
+    daysrange: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    daysoffset: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -112,17 +118,13 @@ proto.app_service.BacktestRequest.deserializeBinaryFromReader = function(msg, re
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setTickera(value);
+      msg.addTicker(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setTickerb(value);
-      break;
-    case 3:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setDaysrange(value);
       break;
-    case 4:
+    case 3:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setDaysoffset(value);
       break;
@@ -155,31 +157,24 @@ proto.app_service.BacktestRequest.prototype.serializeBinary = function() {
  */
 proto.app_service.BacktestRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getTickera();
+  f = message.getTickerList();
   if (f.length > 0) {
-    writer.writeString(
+    writer.writeRepeatedString(
       1,
-      f
-    );
-  }
-  f = message.getTickerb();
-  if (f.length > 0) {
-    writer.writeString(
-      2,
       f
     );
   }
   f = message.getDaysrange();
   if (f !== 0) {
     writer.writeInt32(
-      3,
+      2,
       f
     );
   }
   f = message.getDaysoffset();
   if (f !== 0) {
     writer.writeInt32(
-      4,
+      3,
       f
     );
   }
@@ -187,47 +182,48 @@ proto.app_service.BacktestRequest.serializeBinaryToWriter = function(message, wr
 
 
 /**
- * optional string tickerA = 1;
- * @return {string}
+ * repeated string ticker = 1;
+ * @return {!Array<string>}
  */
-proto.app_service.BacktestRequest.prototype.getTickera = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+proto.app_service.BacktestRequest.prototype.getTickerList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.app_service.BacktestRequest} returns this
+ */
+proto.app_service.BacktestRequest.prototype.setTickerList = function(value) {
+  return jspb.Message.setField(this, 1, value || []);
 };
 
 
 /**
  * @param {string} value
+ * @param {number=} opt_index
  * @return {!proto.app_service.BacktestRequest} returns this
  */
-proto.app_service.BacktestRequest.prototype.setTickera = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
+proto.app_service.BacktestRequest.prototype.addTicker = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
 };
 
 
 /**
- * optional string tickerB = 2;
- * @return {string}
- */
-proto.app_service.BacktestRequest.prototype.getTickerb = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * @param {string} value
+ * Clears the list making it empty but non-null.
  * @return {!proto.app_service.BacktestRequest} returns this
  */
-proto.app_service.BacktestRequest.prototype.setTickerb = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
+proto.app_service.BacktestRequest.prototype.clearTickerList = function() {
+  return this.setTickerList([]);
 };
 
 
 /**
- * optional int32 daysRange = 3;
+ * optional int32 daysRange = 2;
  * @return {number}
  */
 proto.app_service.BacktestRequest.prototype.getDaysrange = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
 
@@ -236,16 +232,16 @@ proto.app_service.BacktestRequest.prototype.getDaysrange = function() {
  * @return {!proto.app_service.BacktestRequest} returns this
  */
 proto.app_service.BacktestRequest.prototype.setDaysrange = function(value) {
-  return jspb.Message.setProto3IntField(this, 3, value);
+  return jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
 /**
- * optional int32 daysOffset = 4;
+ * optional int32 daysOffset = 3;
  * @return {number}
  */
 proto.app_service.BacktestRequest.prototype.getDaysoffset = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
@@ -254,7 +250,7 @@ proto.app_service.BacktestRequest.prototype.getDaysoffset = function() {
  * @return {!proto.app_service.BacktestRequest} returns this
  */
 proto.app_service.BacktestRequest.prototype.setDaysoffset = function(value) {
-  return jspb.Message.setProto3IntField(this, 4, value);
+  return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
