@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bquant.proto\x12\rquant_service\"\x1f\n\x11RegressionRequest\x12\n\n\x02id\x18\x01 \x01(\t\"1\n\x10RegressionResult\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\tsubmitted\x18\x02 \x01(\x08\x32\x61\n\x0cQuantService\x12Q\n\nRegression\x12 .quant_service.RegressionRequest\x1a\x1f.quant_service.RegressionResult\"\x00\x42\x08Z\x06proto/b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bquant.proto\x12\rquant_service\"\x18\n\nJobRequest\x12\n\n\x02id\x18\x01 \x01(\t\"*\n\tJobResult\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\tsubmitted\x18\x02 \x01(\x08\x32\x9e\x01\n\x0cQuantService\x12\x46\n\rCointegration\x12\x19.quant_service.JobRequest\x1a\x18.quant_service.JobResult\"\x00\x12\x46\n\rOLSRegression\x12\x19.quant_service.JobRequest\x1a\x18.quant_service.JobResult\"\x00\x42\x08Z\x06proto/b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,10 +22,10 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'quant_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['DESCRIPTOR']._options = None
   _globals['DESCRIPTOR']._serialized_options = b'Z\006proto/'
-  _globals['_REGRESSIONREQUEST']._serialized_start=30
-  _globals['_REGRESSIONREQUEST']._serialized_end=61
-  _globals['_REGRESSIONRESULT']._serialized_start=63
-  _globals['_REGRESSIONRESULT']._serialized_end=112
-  _globals['_QUANTSERVICE']._serialized_start=114
-  _globals['_QUANTSERVICE']._serialized_end=211
+  _globals['_JOBREQUEST']._serialized_start=30
+  _globals['_JOBREQUEST']._serialized_end=54
+  _globals['_JOBRESULT']._serialized_start=56
+  _globals['_JOBRESULT']._serialized_end=98
+  _globals['_QUANTSERVICE']._serialized_start=101
+  _globals['_QUANTSERVICE']._serialized_end=259
 # @@protoc_insertion_point(module_scope)

@@ -14,17 +14,28 @@ class QuantServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.Regression = channel.unary_unary(
-                '/quant_service.QuantService/Regression',
-                request_serializer=quant__pb2.RegressionRequest.SerializeToString,
-                response_deserializer=quant__pb2.RegressionResult.FromString,
+        self.Cointegration = channel.unary_unary(
+                '/quant_service.QuantService/Cointegration',
+                request_serializer=quant__pb2.JobRequest.SerializeToString,
+                response_deserializer=quant__pb2.JobResult.FromString,
+                )
+        self.OLSRegression = channel.unary_unary(
+                '/quant_service.QuantService/OLSRegression',
+                request_serializer=quant__pb2.JobRequest.SerializeToString,
+                response_deserializer=quant__pb2.JobResult.FromString,
                 )
 
 
 class QuantServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def Regression(self, request, context):
+    def Cointegration(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def OLSRegression(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -33,10 +44,15 @@ class QuantServiceServicer(object):
 
 def add_QuantServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'Regression': grpc.unary_unary_rpc_method_handler(
-                    servicer.Regression,
-                    request_deserializer=quant__pb2.RegressionRequest.FromString,
-                    response_serializer=quant__pb2.RegressionResult.SerializeToString,
+            'Cointegration': grpc.unary_unary_rpc_method_handler(
+                    servicer.Cointegration,
+                    request_deserializer=quant__pb2.JobRequest.FromString,
+                    response_serializer=quant__pb2.JobResult.SerializeToString,
+            ),
+            'OLSRegression': grpc.unary_unary_rpc_method_handler(
+                    servicer.OLSRegression,
+                    request_deserializer=quant__pb2.JobRequest.FromString,
+                    response_serializer=quant__pb2.JobResult.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -49,7 +65,7 @@ class QuantService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def Regression(request,
+    def Cointegration(request,
             target,
             options=(),
             channel_credentials=None,
@@ -59,8 +75,25 @@ class QuantService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/quant_service.QuantService/Regression',
-            quant__pb2.RegressionRequest.SerializeToString,
-            quant__pb2.RegressionResult.FromString,
+        return grpc.experimental.unary_unary(request, target, '/quant_service.QuantService/Cointegration',
+            quant__pb2.JobRequest.SerializeToString,
+            quant__pb2.JobResult.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def OLSRegression(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/quant_service.QuantService/OLSRegression',
+            quant__pb2.JobRequest.SerializeToString,
+            quant__pb2.JobResult.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

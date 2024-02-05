@@ -19,14 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	QuantService_Regression_FullMethodName = "/quant_service.QuantService/Regression"
+	QuantService_Cointegration_FullMethodName = "/quant_service.QuantService/Cointegration"
+	QuantService_OLSRegression_FullMethodName = "/quant_service.QuantService/OLSRegression"
 )
 
 // QuantServiceClient is the client API for QuantService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type QuantServiceClient interface {
-	Regression(ctx context.Context, in *RegressionRequest, opts ...grpc.CallOption) (*RegressionResult, error)
+	Cointegration(ctx context.Context, in *JobRequest, opts ...grpc.CallOption) (*JobResult, error)
+	OLSRegression(ctx context.Context, in *JobRequest, opts ...grpc.CallOption) (*JobResult, error)
 }
 
 type quantServiceClient struct {
@@ -37,9 +39,18 @@ func NewQuantServiceClient(cc grpc.ClientConnInterface) QuantServiceClient {
 	return &quantServiceClient{cc}
 }
 
-func (c *quantServiceClient) Regression(ctx context.Context, in *RegressionRequest, opts ...grpc.CallOption) (*RegressionResult, error) {
-	out := new(RegressionResult)
-	err := c.cc.Invoke(ctx, QuantService_Regression_FullMethodName, in, out, opts...)
+func (c *quantServiceClient) Cointegration(ctx context.Context, in *JobRequest, opts ...grpc.CallOption) (*JobResult, error) {
+	out := new(JobResult)
+	err := c.cc.Invoke(ctx, QuantService_Cointegration_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *quantServiceClient) OLSRegression(ctx context.Context, in *JobRequest, opts ...grpc.CallOption) (*JobResult, error) {
+	out := new(JobResult)
+	err := c.cc.Invoke(ctx, QuantService_OLSRegression_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +61,8 @@ func (c *quantServiceClient) Regression(ctx context.Context, in *RegressionReque
 // All implementations must embed UnimplementedQuantServiceServer
 // for forward compatibility
 type QuantServiceServer interface {
-	Regression(context.Context, *RegressionRequest) (*RegressionResult, error)
+	Cointegration(context.Context, *JobRequest) (*JobResult, error)
+	OLSRegression(context.Context, *JobRequest) (*JobResult, error)
 	mustEmbedUnimplementedQuantServiceServer()
 }
 
@@ -58,8 +70,11 @@ type QuantServiceServer interface {
 type UnimplementedQuantServiceServer struct {
 }
 
-func (UnimplementedQuantServiceServer) Regression(context.Context, *RegressionRequest) (*RegressionResult, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Regression not implemented")
+func (UnimplementedQuantServiceServer) Cointegration(context.Context, *JobRequest) (*JobResult, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Cointegration not implemented")
+}
+func (UnimplementedQuantServiceServer) OLSRegression(context.Context, *JobRequest) (*JobResult, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OLSRegression not implemented")
 }
 func (UnimplementedQuantServiceServer) mustEmbedUnimplementedQuantServiceServer() {}
 
@@ -74,20 +89,38 @@ func RegisterQuantServiceServer(s grpc.ServiceRegistrar, srv QuantServiceServer)
 	s.RegisterService(&QuantService_ServiceDesc, srv)
 }
 
-func _QuantService_Regression_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RegressionRequest)
+func _QuantService_Cointegration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(JobRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QuantServiceServer).Regression(ctx, in)
+		return srv.(QuantServiceServer).Cointegration(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: QuantService_Regression_FullMethodName,
+		FullMethod: QuantService_Cointegration_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QuantServiceServer).Regression(ctx, req.(*RegressionRequest))
+		return srv.(QuantServiceServer).Cointegration(ctx, req.(*JobRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _QuantService_OLSRegression_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(JobRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QuantServiceServer).OLSRegression(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: QuantService_OLSRegression_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QuantServiceServer).OLSRegression(ctx, req.(*JobRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -100,8 +133,12 @@ var QuantService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*QuantServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Regression",
-			Handler:    _QuantService_Regression_Handler,
+			MethodName: "Cointegration",
+			Handler:    _QuantService_Cointegration_Handler,
+		},
+		{
+			MethodName: "OLSRegression",
+			Handler:    _QuantService_OLSRegression_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

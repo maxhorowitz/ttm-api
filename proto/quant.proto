@@ -5,15 +5,16 @@ package quant_service;
 option go_package = "proto/";
 
 service QuantService {
-    rpc Regression(RegressionRequest) returns (RegressionResult) {}
+    rpc Cointegration(JobRequest) returns (JobResult) {}
+    rpc OLSRegression(JobRequest) returns (JobResult) {}
 }
 
-message RegressionRequest {
+message JobRequest {
     string id = 1;
 
 }
 
-message RegressionResult {
+message JobResult {
     string id = 1;
     bool submitted = 2;
 }
